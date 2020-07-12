@@ -5,6 +5,7 @@ from tkinter import filedialog
 import cv2
 from skimage import filters,img_as_ubyte,io
 from skimage.transform import radon
+from skimage import external
 from skimage.color import rgb2gray
 from numpy import pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg,NavigationToolbar2Tk
@@ -32,7 +33,7 @@ def select():
     global gray, canvas, frm2, select_count,f1, a1, a2, f2, path, image_sobel
     path = filedialog.askopenfilename()
     if len(path) > 0 and select_count==0:
-        gray = io.imread(path,as_gray = False)
+        gray = external.tifffile.imread(path)
         if len(gray.shape)>= 4:
             gray = rgb2gray(gray)
         else:
